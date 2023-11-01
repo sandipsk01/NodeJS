@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import ejsLayouts from 'express-ejs-layouts';
 import ProductController from './src/controllers/product.controller.js';
-
+import { validationMiddleware } from './src/middlewares/validation.middleware.js';
 const server = express();
 
 // parse form data
@@ -20,7 +20,7 @@ const productController = new ProductController();
 // routes and controller.methods
 server.get('/', productController.getProducts);
 server.get('/new', productController.getAddForm);
-server.post('/',productController.addNewProduct);
+server.post('/',validationMiddleware, productController.addNewProduct);
 
 server.use(express.static('src/views'));
 
