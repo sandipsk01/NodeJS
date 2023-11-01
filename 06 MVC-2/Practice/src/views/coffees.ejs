@@ -1,0 +1,22 @@
+
+      <table class="table table-success table-hover table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% coffees.forEach((coffee)=> { %>
+          <tr>
+            <th scope="row"><%= coffee.id %></th>
+            <td><%= coffee.title %></td>
+            <td><%= coffee.description %></td>
+            <td><img width="70" src="<%= coffee.image %>" /></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    

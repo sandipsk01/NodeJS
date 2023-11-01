@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "ejs-layouts": "^0.0.1",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1"
+  }
+}
