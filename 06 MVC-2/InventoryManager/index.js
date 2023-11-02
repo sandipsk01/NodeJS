@@ -20,7 +20,10 @@ const productController = new ProductController();
 // routes and controller.methods
 server.get('/', productController.getProducts);
 server.get('/new', productController.getAddForm);
+server.get('/update-product/:id', productController.getUpdateProductView);
+
 server.post('/',validationMiddleware, productController.addNewProduct);
+server.post('/update-product', productController.postUpdateProduct);
 
 server.use(express.static('src/views'));
 

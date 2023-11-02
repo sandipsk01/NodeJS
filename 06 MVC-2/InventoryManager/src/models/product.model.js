@@ -23,6 +23,15 @@ export default class ProductModel{
         productObj.imageUrl)
       products.push(newProduct)
     }
+
+    static getById(id){
+      return products.find((p)=>p.id==id);
+    }
+
+    static update(productObj){
+      const index = products.findIndex((p)=> p.id==productObj.id);
+      products[index] = productObj;
+    }
 }
 
 var products = [
