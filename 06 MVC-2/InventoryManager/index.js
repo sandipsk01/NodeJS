@@ -14,6 +14,7 @@ server.set("views",path.join(path.resolve(), "src", "views"));
 
 server.use(ejsLayouts);
 
+server.use(express.static('public'))
 // create an instance of ProductController
 const productController = new ProductController();
 
@@ -21,6 +22,7 @@ const productController = new ProductController();
 server.get('/', productController.getProducts);
 server.get('/new', productController.getAddForm);
 server.get('/update-product/:id', productController.getUpdateProductView);
+server.post('/delete-product/:id', productController.deleteProduct);
 
 server.post('/',validationMiddleware, productController.addNewProduct);
 server.post('/update-product', productController.postUpdateProduct);
