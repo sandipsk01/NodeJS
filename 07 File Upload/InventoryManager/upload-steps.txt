@@ -1,0 +1,16 @@
+1. Install multer
+    - npm i multer
+
+2. Changes in Views (new-product and update-product)
+    - <form action="/" method="post" enctype="multipart/form-data">
+    - <input type="file" name="imageUrl" id="imageUrl" accept="images/*" />
+
+3. Middleware to handle files
+    - In 'public' folder create 'images' folder
+    - In 'middlewares' folder create 'file-upload.middleware.js'
+
+4. Apply Middleware
+    - In index.js
+        - server.post('/', uploadFile.single('imageUrl'), validationMiddleware, productController.addNewProduct);
+
+5. Update controller to Update url's of images
