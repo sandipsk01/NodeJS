@@ -6,13 +6,13 @@ export default class ProductController{
     getProducts(req, res){
         let products = ProductModel.get();
         // res.render("view",data)
-        res.render("products", {products:products})
+        res.render("products", {products:products, userEmail: req.session.userEmail})
         // return res.sendFile(path.join(path.resolve(), 'src', 'views', 'products.html'))
     }
 
     // Display form view
     getAddForm(req, res){
-        return res.render('new-product', {errorMessage:null})
+        return res.render('new-product', {errorMessage:null, userEmail: req.session.userEmail})
     }
 
     // Post data and calling static add method of model class and display product view
@@ -23,7 +23,7 @@ export default class ProductController{
         ProductModel.add(name, desc, price, imageUrl);
         let products = ProductModel.get();
         // res.render("view",data)
-        res.render("products", {products:products})
+        res.render("products", {products:products, userEmail: req.session.userEmail})
     }
 
     // Update product View
@@ -32,7 +32,7 @@ export default class ProductController{
         const productFound=ProductModel.getById(id);
         // 1.If product exists then return view
         if(productFound){
-            res.render('update-product',{product:productFound, errorMessage:null});
+            res.render('update-product',{product:productFound, errorMessage:null, userEmail: req.session.userEmail});
         }
 
         // 2.else return errors
@@ -45,7 +45,7 @@ export default class ProductController{
     postUpdateProduct(req, res){
         ProductModel.update(req.body);
         var products = ProductModel.get();
-        res.render('products', {products})
+        res.render('products', {products, userEmail: req.session.userEmail})
     }
 
     // Delete Peoduct
@@ -58,6 +58,6 @@ export default class ProductController{
         }
         ProductModel.delete(id);
         var products = ProductModel.get();
-        res.render('products', {products});
+        res.render('products', {products, userEmail: req.session.userEmail});
     }
 }
