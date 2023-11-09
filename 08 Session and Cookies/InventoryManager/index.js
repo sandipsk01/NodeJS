@@ -2,11 +2,13 @@ import express from 'express';
 import path from 'path';
 import ejsLayouts from 'express-ejs-layouts';
 import session from 'express-session';
+import cookieParser from 'cookie-parser';
 import ProductController from './src/controllers/product.controller.js';
 import { validationMiddleware } from './src/middlewares/validation.middleware.js';
 import { uploadFile } from './src/middlewares/file-upload.middleware.js';
 import UserController from './src/controllers/user.controller.js';
 import { auth } from './src/middlewares/auth.middleware.js';
+import { setLastVisit } from './src/middlewares/lastVisit.middleware.js';
 const server = express();
 
 // parse form data
@@ -22,6 +24,8 @@ server.use(ejsLayouts);
 // to make public folder available everywhere
 server.use(express.static('public'));
 
+// to parse data from req to res
+server.use(cookieParser());
 
 // configuration of session
 server.use(session({
@@ -36,7 +40,7 @@ const productController = new ProductController();
 const userController = new UserController();
 
 // routes and controller.methods
-server.get('/', auth, productController.getProducts);
+server.get('/', setLastVisit, auth, productController.getProducts);
 server.get('/new', auth, productController.getAddForm);
 server.get('/update-product/:id', auth, productController.getUpdateProductView);
 server.get('/register', userController.getRegister);
