@@ -10,7 +10,12 @@ export default class ProductModel{
         this.sizes=sizes;
     }
 
-    static GetAll(){
+    static get(id){
+      const product = products.find((i)=>i.id==id);
+      return product;
+    }
+
+    static getAll(){
         return products;
     }
 
@@ -18,6 +23,17 @@ export default class ProductModel{
         product.id=products.length+1;
         products.push(product);
         return product;
+    }
+
+    static filter(minPrice, maxPrice, category){
+      const result = products.filter((product)=>{
+        return (
+          ( !minPrice || product.price>=minPrice ) &&
+          ( !maxPrice || product.price<=maxPrice ) &&
+          ( !category || product.category==category)
+        );
+      });
+      return result;
     }
 } 
 

@@ -9,7 +9,13 @@ const productRouter = express.Router();
 const productController = new ProductController();
 
 // All the paths to controller methods
+
 productRouter.get('/', productController.getAllProducts);
 productRouter.post('/', upload.single('imageUrl'), productController.addProduct);
+
+// http://localhost:3100/api/products/filter?minPrice=10&maxPrice=30     --query params
+productRouter.get('/filter',productController.filterProducts);
+
+productRouter.get('/:id', productController.getOneProduct);
 
 export default productRouter;
